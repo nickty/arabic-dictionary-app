@@ -1,22 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import ArabicDictionary from "arabic-dictionary";
+import "./App.css";
 
 function App() {
+  const [input, setInput] = useState("");
+  const [result, setResult] = useState(null);
+  const [hasSearched, setHasSearched] = useState(false);
+  const [dictionary] = useState(new ArabicDictionary());
+
+  const handleSearch = () => {
+    const searchResult = dictionary.search(input);
+    setResult(searchResult);
+    setHasSearched(true);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Quranic Dictionary</h1>
+        <p>Search a Word in Quran</p>
+        <div className="search-container">
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Enter an English word"
+          />
+          <button onClick={handleSearch}>Search</button>
+        </div>
+        {result !== null ? (
+          <div className="result">
+            <p>Arabic Word: {result.ArabicWord}</p>
+            <p>Frequency: {result.Frequency}</p>
+          </div>
+        ) : (
+          hasSearched && <p>No result found</p>
+        )}
       </header>
     </div>
   );
