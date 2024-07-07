@@ -9,7 +9,8 @@ function App() {
   const [dictionary] = useState(new ArabicDictionary());
 
   const handleSearch = () => {
-    const searchResult = dictionary.search(input);
+    const cleanedInput = input.trim().replace(/\s+/g, " ");
+    const searchResult = dictionary.search(cleanedInput);
     setResult(searchResult);
     setHasSearched(true);
   };
