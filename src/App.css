@@ -1,3 +1,4 @@
+/* App.css */
 .App {
   text-align: center;
 }
@@ -17,15 +18,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
   margin-bottom: 20px;
 }
 
 .search-container input {
-  padding: 10px;
+  width: 100%;
+  padding: 12px;
   font-size: 16px;
-  border: none;
+  border: 2px solid #61dafb;
   border-radius: 4px;
   margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .search-container button {
@@ -45,4 +51,34 @@
 
 .result {
   margin-top: 20px;
+  padding: 20px;
+  background-color: #383d45;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.suggestions {
+  position: absolute;
+  top: 50px; /* Adjusted to ensure it appears right below the input */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 200px; /* Ensures the suggestions box doesn't get too tall */
+}
+
+.suggestion {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: #282c34;
+}
+
+.suggestion:hover {
+  background-color: #f0f0f0;
 }
